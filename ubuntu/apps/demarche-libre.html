@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Démarche Libre - Ubuntu</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../ubuntu.css" />
+    <script src="../ubuntu.js"></script>
+
+    <link rel="stylesheet" href="../assets/demarche-libre.css" />
+    <script src="../assets/demarche-libre.js"></script>
+  </head>
+  <body>
+    <!-- Barre du haut -->
+    <div class="top-bar d-flex justify-content-between align-items-center px-3">
+      <div class="system-info">Linux Ubuntu</div>
+      <span class="top-bar-text-display" id="clock"></span>
+      <div class="top-icons d-flex align-items-center gap-3">
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/wifi.png"
+          class="top-icon"
+        />
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/medium-volume.png"
+          class="top-icon"
+        />
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/shutdown.png"
+          class="top-icon"
+        />
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column justify-content-between pt-2">
+      <div class="sidebar-middle d-flex flex-column align-items-center">
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/home.png"
+          class="side-icon mb-4"
+          onclick="goTo('ubuntu.html')"
+        />
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/console.png"
+          class="side-icon mb-4"
+        />
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/settings.png"
+          class="side-icon mb-4"
+        />
+      </div>
+      <div class="sidebar-bottom d-flex flex-column align-items-center pb-3">
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/circled-menu.png"
+          class="side-icon"
+        />
+      </div>
+    </div>
+
+    <!-- Desktop -->
+    <div class="ubuntu-desktop">
+      <!-- Fenêtre Ubuntu -->
+      <div class="ubuntu-window">
+        <div
+          class="window-header d-flex justify-content-between align-items-center px-2"
+        >
+          <span>Démarche Libre</span>
+          <button
+            class="btn-close-window"
+            onclick="goTo('ubuntu.html')"
+          ></button>
+        </div>
+        <div class="window-content p-0">
+          <div class="checkerboard-bg">
+            <div class="article-body">
+              <h2>La Démarche Libre et Open Source</h2>
+              <p>
+                L'informatique libre repose sur le principe que chacun peut
+                utiliser des logiciels sans restrictions imposées par des
+                licences propriétaires. Le code source étant accessible, les
+                logiciels libres favorisent l’innovation, la transparence et la
+                sécurité.
+              </p>
+              <p>
+                Au-delà de l’informatique, cette démarche encourage la
+                collaboration, la transparence et le partage dans de nombreux
+                domaines, de l’éducation à la documentation, et même dans les
+                projets scientifiques ou administratifs.
+              </p>
+
+              <h3>Pourquoi adopter le libre ?</h3>
+              <ul>
+                <li>
+                  <strong>Transparence :</strong> vous savez exactement ce que
+                  fait le logiciel et comment vos données sont utilisées.
+                </li>
+                <li>
+                  <strong>Autonomie :</strong> vous n’êtes pas dépendant d’un
+                  fournisseur unique et pouvez choisir ou changer vos outils
+                  facilement.
+                </li>
+                <li>
+                  <strong>Sécurité :</strong> les logiciels libres sont
+                  régulièrement vérifiés et améliorés, ce qui réduit les risques
+                  de failles ou de logiciels malveillants.
+                </li>
+                <li>
+                  <strong>Respect de la vie privée :</strong> ils collectent
+                  moins de données personnelles que la plupart des solutions
+                  propriétaires.
+                </li>
+                <li>
+                  <strong>Économie :</strong> beaucoup de logiciels libres sont
+                  gratuits ou peu coûteux, ce qui réduit les dépenses pour les
+                  particuliers, les entreprises et les institutions.
+                </li>
+                <li>
+                  <strong>Durabilité :</strong> utiliser des logiciels libres
+                  permet de construire des systèmes pérennes et indépendants des
+                  décisions commerciales d’un éditeur.
+                </li>
+              </ul>
+
+              <h3>Exemples de logiciels libres</h3>
+              <ul>
+                <li>
+                  <strong>Linux :</strong> systèmes d’exploitation variés et
+                  stables pour ordinateurs et serveurs.
+                </li>
+                <li>
+                  <strong>LibreOffice :</strong> suite bureautique complète
+                  (traitement de texte, tableurs, présentations).
+                </li>
+                <li><strong>GIMP :</strong> retouche et création d’images.</li>
+                <li>
+                  <strong>Firefox :</strong> navigateur web respectueux de la
+                  vie privée.
+                </li>
+                <li><strong>Blender :</strong> création 3D et animation.</li>
+                <li>
+                  <strong>Audacity :</strong> édition audio libre et gratuite.
+                </li>
+              </ul>
+
+              <h3>Comment passer au libre ?</h3>
+              <ol>
+                <li>
+                  Remplacez progressivement vos logiciels propriétaires par des
+                  alternatives libres adaptées à vos besoins.
+                </li>
+                <li>
+                  Formez vos équipes et vos collaborateurs à l’utilisation des
+                  logiciels libres.
+                </li>
+                <li>
+                  Évaluez les gains économiques, sécuritaires et
+                  organisationnels du libre pour votre structure.
+                </li>
+                <li>
+                  Encouragez les bonnes pratiques de partage et de collaboration
+                  au sein de votre organisation.
+                </li>
+              </ol>
+
+              <h3>Les bénéfices pour la société</h3>
+              <p>
+                Le logiciel libre favorise la liberté numérique, réduit la
+                dépendance aux grandes entreprises technologiques et permet une
+                meilleure maîtrise des outils. Il soutient l’innovation, la
+                collaboration et l’éthique dans l’usage de l’informatique.
+              </p>
+              <p>
+                En choisissant le libre, particuliers, entreprises et
+                institutions participent à un écosystème plus ouvert, sûr et
+                durable, tout en encourageant des pratiques responsables et
+                transparentes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

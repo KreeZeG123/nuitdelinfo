@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Femmes et Informatique - Ubuntu</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../ubuntu.css" />
+    <script src="../ubuntu.js"></script>
+
+    <link rel="stylesheet" href="../assets/demarche-libre.css" />
+    <script src="../assets/demarche-libre.js"></script>
+  </head>
+  <body>
+    <!-- Barre du haut -->
+    <div class="top-bar d-flex justify-content-between align-items-center px-3">
+      <div class="system-info">Linux Ubuntu</div>
+      <span class="top-bar-text-display" id="clock"></span>
+      <div class="top-icons d-flex align-items-center gap-3">
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/wifi.png"
+          class="top-icon"
+        />
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/medium-volume.png"
+          class="top-icon"
+        />
+        <img
+          src="https://img.icons8.com/ios-glyphs/24/ffffff/shutdown.png"
+          class="top-icon"
+        />
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar d-flex flex-column justify-content-between pt-2">
+      <div class="sidebar-middle d-flex flex-column align-items-center">
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/home.png"
+          class="side-icon mb-4"
+          onclick="goTo('ubuntu.html')"
+        />
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/console.png"
+          class="side-icon mb-4"
+        />
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/settings.png"
+          class="side-icon mb-4"
+        />
+      </div>
+      <div class="sidebar-bottom d-flex flex-column align-items-center pb-3">
+        <img
+          src="https://img.icons8.com/ios-filled/50/ffffff/circled-menu.png"
+          class="side-icon"
+        />
+      </div>
+    </div>
+
+    <!-- Desktop -->
+    <div class="ubuntu-desktop">
+      <!-- Fenêtre Ubuntu -->
+      <div class="ubuntu-window">
+        <div
+          class="window-header d-flex justify-content-between align-items-center px-2"
+        >
+          <span>Femmes et Informatique</span>
+          <button
+            class="btn-close-window"
+            onclick="goTo('ubuntu.html')"
+          ></button>
+        </div>
+        <div class="window-content">Contenu ici</div>
+      </div>
+    </div>
+  </body>
+</html>
