@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Femmes et Informatique - Ubuntu</title>
+    <title>Terminal - Ubuntu</title>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -51,56 +51,60 @@
     <!-- Desktop -->
     <div class="ubuntu-desktop">
       <!-- Fenêtre Ubuntu -->
-      <div class="ubuntu-window">
+      <div class="ubuntu-window d-flex flex-column" style="height: 100%">
         <div
           class="window-header d-flex justify-content-between align-items-center px-2"
         >
-          <span>Femmes et Informatique</span>
+          <span>Terminal</span>
           <button
             class="btn-close-window"
             onclick="goTo('ubuntu.html')"
           ></button>
         </div>
-        <div class="window-content p-3 px-4 text-center">
-          <h2>Femmes et Informatique</h2>
 
-          <!-- Introduction -->
-          <section class="mb-4 px-3 w-100 text-center">
-            <p class="px-3 text-center w-75 mx-auto">
-              Depuis les pionnières comme Ada Lovelace jusqu'aux ingénieures,
-              chercheuses et entrepreneuses d'aujourd'hui, les femmes ont joué
-              un rôle essentiel dans le développement de l'informatique.
-              Pourtant, elles restent encore sous-représentées dans les
-              formations et métiers du numérique. Il est important de mettre en
-              valeur leur contribution et de sensibiliser le public à
-              l'importance de la mixité dans ce domaine.
-            </p>
-          </section>
+        <!-- Window content prend tout l'espace restant -->
+        <div class="window-content flex-grow-1 p-0 m-0">
+          <div
+            class="d-flex flex-column p-3"
+            style="
+              background-color: #000;
+              color: #00ff00;
+              font-family: 'Courier New', monospace;
+              font-size: 18px;
+              height: 100%;
+              overflow-y: auto;
+              white-space: pre-wrap;
+            "
+          >
+            <pre>
+$ echo "Bienvenue dans le terminal de la Nuit de l'Info"
 
-          <!-- Vidéo -->
-          <section class="mb-4 text-center">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/ioP9L_1-vKE?si=DcGUtoXW3ECsc2EC"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-          </section>
+La Nuit de l’Info est une compétition nationale qui réunit étudiants, enseignants et entreprises pour travailler ensemble sur le développement d’une application web.
 
-          <!-- Flyer -->
-          <section class="mb-4 text-center">
-            <a
-              href="../assets/img/video/flyer.pdf"
-              download
-              class="btn btn-primary"
+Objectifs :
+- Faire travailler ensemble des étudiants sur un défi informatique national sur la durée d'une nuit.
+- Encourager la transversalité et la créativité dans des équipes multi-disciplinaires.
+- Découvrir et utiliser de nouvelles technologies (Web 2.0, multimédia, réseaux sociaux).
+
+Défis principaux et secondaires :
+- Principal : Créez une application ludique et engageante sur la réduction de la dépendance numérique.
+- Secondaires :
+  1. Chat bruti
+  2. L'ergonomie : simplifier pour mieux vivre
+  3. La faille la plus maligne
+  4. Hidden Snake
+  5. Femmes et Informatique
+
+Participants :
+- Allae TONIA
+- Arina ABED
+- Yamis MANFALOTI
+- Flora VALLET
+
+$ echo "Merci d'avoir visité notre site !"
+</pre
             >
-              📄 Télécharger le flyer (PDF)
-            </a>
-          </section>
+          </div>
         </div>
       </div>
     </div>

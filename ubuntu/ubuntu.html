@@ -20,9 +20,9 @@
       <div class="system-info">Linux Ubuntu</div>
       <span class="top-bar-text-display" id="clock"></span>
       <div class="top-icons d-flex align-items-center gap-3">
-        <img src="./assets/wifi.png" class="top-icon" />
-        <img src="./assets/medium-volume.png" class="top-icon" />
-        <img src="./assets/shutdown.png" class="top-icon" />
+        <img src="./assets/img/wifi.png" class="top-icon" />
+        <img src="./assets/img/medium-volume.png" class="top-icon" />
+        <img src="./assets/img/shutdown.png" class="top-icon" />
       </div>
     </div>
 
@@ -30,17 +30,25 @@
     <div class="sidebar d-flex flex-column justify-content-between pt-2">
       <div class="sidebar-middle d-flex flex-column align-items-center">
         <img
-          src="./assets/home.png"
+          src="./assets/img/home.png"
           class="side-icon mb-4"
           onclick="goTo('ubuntu.html')"
         />
-        <img src="./assets/console.png" class="side-icon mb-4" />
-        <img src="./assets/settings.png" class="side-icon mb-4" />
+        <img
+          src="./assets/img/console.png"
+          class="side-icon mb-4"
+          onclick="goTo('apps/terminal.html')"
+        />
+        <img
+          src="./assets/img/settings.png"
+          class="side-icon mb-4"
+          onclick="goTo('apps/parametres.html')"
+        />
       </div>
 
       <div class="sidebar-bottom d-flex flex-column align-items-center pb-3">
         <img
-          src="./assets/circled-menu.png"
+          src="./assets/img/circled-menu.png"
           class="side-icon"
           title="Applications"
         />
@@ -52,22 +60,26 @@
       <div
         class="icon"
         style="grid-column: 1; grid-row: 1"
+        onclick="goTo('apps/demarche-libre.html')"
+      >
+        <img src="./assets/img/icons8-open-source-96.png" class="icon-img" />
+        <p class="icon-label">Le Monde Libre</p>
+      </div>
+      <div
+        class="icon"
+        style="grid-column: 1; grid-row: 2"
         onclick="goTo('apps/femmes-informatique.html')"
       >
-        <img
-          src="https://img.icons8.com/?size=100&id=9YuYRn0EiXoM&format=png&color=ffffff"
-          class="icon-img"
-        />
+        <img src="./assets/img/femme.png" class="icon-img" />
         <p class="icon-label">Femmes et Informatique</p>
       </div>
-
       <div
         class="icon"
         style="grid-column: 1; grid-row: 3"
-        onclick="goTo('apps/demarche-libre.html')"
+        onclick="window.location.href = '../windows/windows.html';"
       >
-        <img src="./assets/icons8-open-source-96.png" class="icon-img" />
-        <p class="icon-label">Le Monde Libre</p>
+        <img src="./assets/img/windows-xp-icon.png" class="icon-img" />
+        <p class="icon-label">Retour en Enfer</p>
       </div>
     </div>
   </body>

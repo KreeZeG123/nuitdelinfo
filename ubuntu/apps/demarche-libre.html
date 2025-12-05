@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="../ubuntu.css" />
     <script src="../ubuntu.js"></script>
 
-    <link rel="stylesheet" href="../assets/demarche-libre.css" />
-    <script src="../assets/demarche-libre.js"></script>
+    <link rel="stylesheet" href="../assets/img/demarche-libre.css" />
+    <script src="../assets/img/demarche-libre.js"></script>
   </head>
   <body>
     <!-- Barre du haut -->
@@ -21,9 +21,9 @@
       <div class="system-info">Linux Ubuntu</div>
       <span class="top-bar-text-display" id="clock"></span>
       <div class="top-icons d-flex align-items-center gap-3">
-        <img src="../assets/wifi.png" class="top-icon" />
-        <img src="../assets/medium-volume.png" class="top-icon" />
-        <img src="../assets/shutdown.png" class="top-icon" />
+        <img src="../assets/img/wifi.png" class="top-icon" />
+        <img src="../assets/img/medium-volume.png" class="top-icon" />
+        <img src="../assets/img/shutdown.png" class="top-icon" />
       </div>
     </div>
 
@@ -31,15 +31,23 @@
     <div class="sidebar d-flex flex-column justify-content-between pt-2">
       <div class="sidebar-middle d-flex flex-column align-items-center">
         <img
-          src="../assets/home.png"
+          src="../assets/img/home.png"
           class="side-icon mb-4"
           onclick="goTo('ubuntu.html')"
         />
-        <img src="../assets/console.png" class="side-icon mb-4" />
-        <img src="../assets/settings.png" class="side-icon mb-4" />
+        <img
+          src="../assets/img/console.png"
+          class="side-icon mb-4"
+          onclick="goTo('apps/terminal.html')"
+        />
+        <img
+          src="../assets/img/settings.png"
+          class="side-icon mb-4"
+          onclick="goTo('apps/parametres.html')"
+        />
       </div>
       <div class="sidebar-bottom d-flex flex-column align-items-center pb-3">
-        <img src="../assets/circled-menu.png" class="side-icon" />
+        <img src="../assets/img/circled-menu.png" class="side-icon" />
       </div>
     </div>
 
