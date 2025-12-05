@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows XP - Edition BigTech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="windows.css">
+</head>
+<body>
+
+    <div id="desktop-xp">
+        
+        <div class="desktop-icons">
+            <div class="icon" onclick="openIE()">
+                <img src="assets/img/internet-explorer-8-web-browser-computer-icons-internet-explorer-10-recycle-logo-png-40daf9a58e887222d1910c0e38174392.png" alt="IE">
+                <span>Internet<br>Explorer</span>
+            </div>
+            <!-- <div class="icon" onclick="openData()">
+                <img src="assets/img/mdoh3ksuu3mtiaibnbh25qt28q-f4f74a753cb961a8f42b45e4dc94d449.png" alt="Mail">
+                <span>Mes<br>Données</span>
+            </div> -->
+            <div class="icon" onclick="openTrash()">
+                <img src="assets/img/m00gffbnvtr4p47sm2kvejd215-c1a75cfb8cade13b890a430b270d74eb.png" alt="Trash">
+                <span>Corbeille</span>
+            </div>
+            <div class="icon" onclick="openComputer()">
+                <img src="assets/img/8of7shdh8kbf8dafl19n2i6b4r-453c9da1ecb6dcb7214d8f98206dfb62.png" alt="Windows">
+                <span>Mon<br>Ordinateur</span>
+            </div>
+            <div class="icon" onclick="openSupportChat()">
+                <img src="assets/img/livechat-online-chat-computer-icons-chat-room-web-chat-others-92e60a1efac72303df62cb9811a1f796.png" alt="Support">
+                <span>Chat<br>Bruti</span>
+            </div>
+            <div class="icon" onclick="openSurveillancePage()">
+                <img src="assets/img/9qpncvgj7tjkria132cpti9onv.png" alt="Surveillance">
+                <span>Surveillance<br>Infos</span>
+            </div>
+        </div>
+
+        <div id="popup-container"></div>
+
+        <div class="taskbar">
+            <button class="start-btn" onclick="toggleStartMenu()">
+                <img src="assets/img/windows-xp-logo-microsoft-windows-1-windows-logos-c5d75d4d2a7ae803f81aa30a36aa4d0a.png" alt="Start" style="width: 20px; height: 20px; vertical-align: middle;"> 
+                <span style="margin-left: 5px;">Démarrer</span>
+            </button>
+            <div class="taskbar-apps" id="taskbar-apps"></div>
+            
+            <!-- Bouton Linux dans la barre des tâches (toujours visible) -->
+            <button class="linux-taskbar-btn" onclick="showLinuxTransitionTrap()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Tux.svg" alt="Linux" style="width: 24px; height: 24px; vertical-align: middle;">
+                <span style="margin-left: 5px; font-weight: bold;">🆘 SAUVER LE PC</span>
+            </button>
+            
+            <div class="system-tray">
+                <div class="tray-icons">🔊 ⚠️ 🌐</div>
+                <div class="clock" id="clock">12:00</div>
+            </div>
+        </div>
+
+        <div id="start-menu" class="start-menu" style="display: none;">
+            <div class="start-menu-header">
+                <img src="assets/img/windows-xp-logo-microsoft-windows-1-windows-logos-c5d75d4d2a7ae803f81aa30a36aa4d0a.png" alt="XP" style="width: 30px;">
+                <span>Windows XP</span>
+            </div>
+            <div class="start-menu-items">
+                <div class="menu-item" onclick="createAd('Gagnez un iPhone 15!')">📧 Courrier électronique</div>
+                <div class="menu-item" onclick="createAd('Votre PC est lent? Téléchargez notre accélérateur!')">💻 Internet Explorer</div>
+                <div class="menu-item" onclick="createPopup('Erreur', 'Cette fonctionnalité nécessite Windows Premium (99€/mois)', 'error')">📁 Mes documents</div>
+                <div class="menu-item" onclick="createAd('VIRUS DÉTECTÉ! Cliquez ici!')">⚙️ Panneau de configuration</div>
+            </div>
+            <div class="start-menu-footer">
+                <button class="btn btn-danger btn-sm" onclick="triggerBSOD()">Arrêter l'ordinateur</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bsod" class="bsod" style="display: none;">
+    <p>Windows a rencontré un problème... comme d'habitude.</p>
+    <p>Nous collectons des informations sur cette erreur pour ne jamais la corriger.</p>
+    <br>
+    <h2 style="font-size: 40px;">:(</h2>
+    <br>
+    <p>Votre PC a besoin de respirer. Windows consomme 110% de vos ressources pour afficher des publicités.</p>
+    <p>Code d'arrêt : OBSOLESCENCE_PROGRAMMEE</p>
+    <br>
+    <br>
+    <div style="margin-top: 50px;">
+        <p>Il existe une seule façon de sauver cette machine...</p>
+        <p class="blink" style="color: #00ff00; font-size: 22px; margin-top: 20px;">
+            [ APPUYEZ SUR ENTRÉE POUR PASSER DU CÔTÉ OBSCUR (LINUX) ]
+        </p>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="windows.js"></script>
+</body>
+</html>
