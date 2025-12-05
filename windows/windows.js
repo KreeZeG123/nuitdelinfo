@@ -727,6 +727,11 @@ function triggerBSOD() {
     const bsod = document.getElementById('bsod');
     if(bsod) {
         bsod.style.display = 'block';
+        
+        // Ajouter un onclick sur le BSOD pour passer à Linux
+        bsod.onclick = function() {
+            goToLinux();
+        };
     } else {
         alert("ERREUR CRITIQUE (BSOD manquant dans le HTML)");
     }
