@@ -20,17 +20,12 @@
 }
 
 .article-body {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.75
-  ); /* légèrement plus opaque pour lisibilité */
-  color: #111; /* texte sombre */
+  background-color: rgba(255, 255, 255, 0.75);
+  color: #111;
   min-height: 100%;
   padding: 40px;
   box-sizing: border-box;
-  font-size: 20px; /* un peu plus confortable pour lecture */
+  font-size: 20px;
   line-height: 1.8;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   border-radius: 10px;
