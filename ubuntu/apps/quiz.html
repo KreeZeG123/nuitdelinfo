@@ -11,7 +11,10 @@
     />
     <link rel="stylesheet" href="../ubuntu.css" />
     <script src="../ubuntu.js"></script>
+    
   </head>
+
+
   <body>
     <!-- Barre du haut -->
     <div class="top-bar d-flex justify-content-between align-items-center px-3">
@@ -61,8 +64,26 @@
             onclick="goTo('ubuntu.html')"
           ></button>
         </div>
-        <div class="window-content"></div>
+            <div class="window-content">
+      <div id="quiz-container" style="max-width: 450px; background: #fff; padding: 20px; border-radius: 10px; border: 2px solid #0054E3; font-family: system-ui, sans-serif; margin: 20px auto;">
+        <h2 style="font-size: 20px; margin-bottom: 15px;">🎮 Quiz Numérique</h2>
+
+        <p id="quiz-question" style="font-weight: 500; min-height: 60px;">
+          Question here...
+        </p>
+
+        <div id="quiz-options"></div>
+
+        <p id="quiz-feedback" style="margin-top: 15px; font-weight: bold; min-height: 24px;"></p>
+
+        <button onclick="nextQuestion()" class="btn btn-sm btn-primary" style="margin-top: 15px;">
+          Question suivante
+        </button>
       </div>
     </div>
+
+      </div>
+    </div>
+    <script src="../assets/js/quiz.js"></script>
   </body>
 </html>
