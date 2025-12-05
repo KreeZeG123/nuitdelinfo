@@ -154,54 +154,24 @@ function openSurveillancePage() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 7000; width: 600px; max-width: 90vw; height: 500px; max-height: 85vh;';
+    // Grande fenêtre qui prend presque tout l'écran
+    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 9000; width: 95vw; height: 90vh; max-width: 1200px;';
     
     win.innerHTML = `
         <div class="title-bar">
-            <span>👁️ Sensibilisation à la Surveillance Numérique</span>
+            <span>👁️ Windows Nous Surveille - Page de Sensibilisation</span>
             <div class="window-buttons">
                 <div class="window-btn close-btn" onclick="closeWindow(${id})">✕</div>
             </div>
         </div>
-        <div class="window-content" style="height: calc(100% - 30px); overflow-y: auto; padding: 20px;">
-            <h3 style="color: #0054E3; margin-top: 0;">🕵️ Vous êtes surveillé(e) !</h3>
-            <p style="font-size: 13px; line-height: 1.6;">
-                Chaque jour, vos données personnelles sont collectées, analysées et vendues par les géants de la tech. 
-                Vos recherches, vos messages, vos photos, votre localisation... tout est enregistré.
-            </p>
-            
-            <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin: 15px 0; border-radius: 5px;">
-                <h4 style="margin-top: 0; color: #856404;">⚠️ Le saviez-vous ?</h4>
-                <ul style="font-size: 12px; margin: 10px 0; padding-left: 20px;">
-                    <li>Les GAFAM collectent en moyenne 72 Go de données par utilisateur chaque année</li>
-                    <li>Votre historique de navigation est vendu à des annonceurs pour cibler vos faiblesses</li>
-                    <li>Les assistants vocaux écoutent en permanence (même quand vous croyez qu'ils dorment)</li>
-                    <li>Vos métadonnées révèlent plus sur vous que le contenu de vos messages</li>
-                </ul>
-            </div>
-            
-            <h4 style="color: #0054E3;">🛡️ Comment se protéger ?</h4>
-            <div style="font-size: 12px; line-height: 1.6; margin: 10px 0;">
-                <p><strong>✅ Utilisez des logiciels open-source</strong> (Linux, Firefox, Signal...)</p>
-                <p><strong>✅ Chiffrez vos communications</strong> (VPN, messageries sécurisées)</p>
-                <p><strong>✅ Limitez les permissions des applications</strong></p>
-                <p><strong>✅ Lisez les politiques de confidentialité</strong> (ou au moins essayez 😅)</p>
-                <p><strong>✅ Désactivez la géolocalisation quand elle n'est pas nécessaire</strong></p>
-            </div>
-            
-            <div style="background: #d1ecf1; border: 2px solid #17a2b8; padding: 15px; margin: 15px 0; border-radius: 5px; text-align: center;">
-                <p style="font-size: 14px; margin: 0; font-weight: bold;">
-                    💡 La vie privée est un droit fondamental, pas un luxe !
-                </p>
-            </div>
-            
-            <div style="text-align: center; margin-top: 20px;">
-                <button class="btn btn-primary xp-button" onclick="closeWindow(${id})">J'ai compris</button>
-            </div>
-            
-            <p style="font-size: 10px; color: #666; text-align: center; margin-top: 20px; font-style: italic;">
-                Cette page sera bientôt remplacée par du contenu interactif plus complet
-            </p>
+        <div class="window-content" style="height: calc(100% - 30px); display: flex; flex-direction: column; padding: 0;">
+            <!-- IFrame pour afficher surveillance.html -->
+            <iframe 
+                src="apps/surveillance.html" 
+                style="width: 100%; height: 100%; border: none; background: white;"
+                onload="console.log('Page surveillance.html chargée')"
+                onerror="this.innerHTML='<div style=padding:20px;>❌ Erreur: Impossible de charger surveillance.html</div>'">
+            </iframe>
         </div>
     `;
     container.appendChild(win);
@@ -222,15 +192,15 @@ function openSupportChat() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    // FENÊTRE COMPLÈTE ET IMPOSANTE !
-    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 7000; width: 700px; max-width: 90vw; height: 600px; max-height: 85vh;';
+    // FENÊTRE COMPLÈTE ET IMPOSANTE ! Z-index très élevé pour rester au-dessus de TOUTES les autres popups
+    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 99999; width: 700px; max-width: 90vw; height: 600px; max-height: 85vh;';
     
     chatMessages = [];
     chatMessageIndex = 0;
     
     win.innerHTML = `
         <div class="title-bar">
-            <span>💬 Chat Bruti - Service Client Premium</span>
+            <span> 🤖 Chat Bruti - Service Client Premium</span>
             <div class="window-buttons">
                 <div class="window-btn close-btn" onclick="closeWindow(${id})">✕</div>
             </div>
@@ -242,8 +212,8 @@ function openSupportChat() {
             </div>
             <div id="chat-${id}" style="flex: 1; overflow-y: auto; border: 2px solid #999; padding: 15px; background: white; margin-bottom: 10px; font-size: 13px;">
                 <div style="background: #e3f2fd; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid #0054E3;">
-                    <strong>🤖 BotSupport:</strong> Bonjour ! Je suis votre assistant virtuel Chat Bruti.<br>
-                    <span style="font-size: 11px; color: #666;">Je suis là pour ne pas résoudre vos problèmes. Comment puis-je vous frustrer aujourd'hui ?</span>
+                    <strong>🤖 ChatBruti:</strong> Bonjour humain ! Je suis votre Assistant d'Incompétence Artificielle. 🧠🚫<br>
+                    <span style="font-size: 11px; color: #666;">Je suis programmé pour mal comprendre vos questions... Comment puis-je vous ignorer aujourd'hui ?</span>
                 </div>
             </div>
             <div style="display: flex; gap: 8px; padding: 10px; background: #f0f0f0; border-top: 1px solid #ccc;">
@@ -738,7 +708,7 @@ document.addEventListener('mousemove', (e) => {
         e.preventDefault();
         currentWindow.style.left = (e.clientX - offset.x) + 'px';
         currentWindow.style.top = (e.clientY - offset.y) + 'px';
-        currentWindow.style.transform = 'none'; // Annule le translate(-50%) si présent
+        currentWindow.style.transform = 'none'; 
     }
 });
 
