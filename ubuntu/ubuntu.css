@@ -50,7 +50,7 @@ body {
   margin-left: 60px;
   margin-top: 28px;
   height: calc(100vh - 28px);
-  background-image: url("./assets/ubuntu_wallpaper.jpg");
+  background-image: url("./assets/img/ubuntu_wallpaper.jpg");
   background-size: cover;
   background-position: center;
   display: grid;
@@ -132,6 +132,8 @@ body {
 
 /* Styles de base pour toutes les fenêtres */
 .window-content {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   color: white;
   overflow-y: auto;
@@ -141,4 +143,46 @@ body {
   overflow-y: auto;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  box-sizing: border-box;
+  font-size: 20px;
+  line-height: 1.8;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Titres */
+.window-content h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.window-content h3 {
+  font-size: 26px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+/* Paragraphes */
+.window-content p {
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+/* Listes */
+.window-content ul,
+.window-content ol {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.window-content ul li,
+.window-content ol li {
+  margin-bottom: 10px;
+}
+
+/* Petits détails */
+.window-content strong {
+  color: #c5b3b3;
 }
