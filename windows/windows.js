@@ -186,6 +186,11 @@ function openSurveillancePage() {
 let chatMessages = [];
 let chatMessageIndex = 0;
 
+// État du chat pour alterner sans hasard
+let chatTurn = 0;      // 0 = mode QA (question/réponse), 1 = mode réponse seule, puis ça alterne
+let qaIndex = 0;       // index dans botQuestions / QA
+let respIndex = 0;     // index dans botResponses
+
 function openSupportChat() {
     const container = document.getElementById('popup-container');
     const id = ++popupCounter;
@@ -200,21 +205,22 @@ function openSupportChat() {
     
     win.innerHTML = `
         <div class="title-bar">
-            <span> 🤖 Chat Bruti - Service Client Premium</span>
+            <span> 🐱 CatGPNulle - Service Client Premium</span>
             <div class="window-buttons">
                 <div class="window-btn close-btn" onclick="closeWindow(${id})">✕</div>
             </div>
         </div>
         <div class="window-content" style="height: calc(100% - 30px); display: flex; flex-direction: column;">
             <div style="background: #f0f0f0; padding: 10px; border-bottom: 2px solid #0054E3; margin-bottom: 10px;">
-                <h3 style="margin: 0; color: #0054E3; font-size: 16px;">🤖 Chat Bruti</h3>
+                <h3 style="margin: 0; color: #0054E3; font-size: 16px;">🐱 CatGPNulle</h3>
                 <p style="margin: 5px 0 0 0; font-size: 11px; color: #666;">En ligne • Temps de réponse : ∞ minutes</p>
             </div>
             <div id="chat-${id}" style="flex: 1; overflow-y: auto; border: 2px solid #999; padding: 15px; background: white; margin-bottom: 10px; font-size: 13px;">
                 <div style="background: #e3f2fd; padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 4px solid #0054E3;">
-                    <strong>🤖 ChatBruti:</strong> Bonjour humain ! Je suis votre Assistant d'Incompétence Artificielle. 🧠🚫<br>
-                    <span style="font-size: 11px; color: #666;">Je suis programmé pour mal comprendre vos questions... Comment puis-je vous ignorer aujourd'hui ?</span>
-                </div>
+                    <strong>🐾 CatGPNulle (v2.0):</strong> Hello 😺!  
+                   Je suis ton assistant totalement inutile, mais expert IA auto-proclamé sur LinkedIn.
+En quoi puis-je te désaider aujourd’hui, miaou ?     
+                    </div>
             </div>
             <div style="display: flex; gap: 8px; padding: 10px; background: #f0f0f0; border-top: 1px solid #ccc;">
                 <input type="text" id="chat-input-${id}" placeholder="Décrivez votre problème (ça ne changera rien)..." 
@@ -226,7 +232,6 @@ function openSupportChat() {
     `;
     container.appendChild(win);
 }
-
 function sendChatMessage(winId) {
     const input = document.getElementById(`chat-input-${winId}`);
     const chatDiv = document.getElementById(`chat-${winId}`);
@@ -234,71 +239,117 @@ function sendChatMessage(winId) {
     
     const userMsg = input.value.trim();
     if (!userMsg) return;
-    
-    // Message utilisateur - Style moderne avec bulle
-    chatDiv.innerHTML += `
-        <div style="margin: 10px 0; text-align: right;">
-            <div style="display: inline-block; background: #0054E3; color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; max-width: 70%; text-align: left;">
-                <strong>👤 Vous:</strong><br>${userMsg}
-            </div>
-        </div>
-    `;
-    input.value = '';
-    
-    // Afficher l'indicateur de frappe
-    const typingId = `typing-${Date.now()}`;
-    chatDiv.innerHTML += `
-        <div id="${typingId}" style="margin: 10px 0;">
-            <div style="display: inline-block; background: #f0f0f0; padding: 10px 15px; border-radius: 15px 15px 15px 0; color: #666; font-style: italic;">
-                <strong>🤖 BotSupport</strong> est en train d'écrire...
-            </div>
-        </div>
-    `;
-    chatDiv.scrollTop = chatDiv.scrollHeight;
-    
-    // Réponses absurdes du bot - VERSION ÉTENDUE
-    const botResponses = [
-        "Avez-vous essayé de redémarrer ? C'est la solution à 99,9% des problèmes. Les 0,1% restants ? Redémarrez deux fois.",
-        "Ce problème est normal. C'est une fonctionnalité, pas un bug. Microsoft l'a conçu ainsi pour vous faire apprécier Linux.",
-        "Veuillez patienter 48h pour une réponse. Ou 72h. Peut-être une semaine. On ne sait jamais vraiment.",
-        "Erreur 404 : Compétence non trouvée. Avez-vous vérifié dans la corbeille ?",
-        "Avez-vous Windows Vista ? Si non, installez-le. C'était le meilleur Windows. (Je plaisante, bien sûr)",
-        "Je vais transférer votre demande à mon supérieur. (Spoiler : il n'existe pas. Personne n'existe ici.)",
-        "Votre garantie a expiré en 2001. Mais ne vous inquiétez pas, elle n'a jamais vraiment fonctionné.",
-        "C'est clairement un problème entre la chaise et le clavier. Avez-vous essayé de changer de chaise ?",
-        "Avez-vous essayé de souffler dans le port USB ? Ça marche sur les cartouches Nintendo, pourquoi pas ici ?",
-        "La solution : achetez un Mac. Ah non, attendez... Achetez Linux. Non, c'est gratuit. Téléchargez Linux !",
-        "Je ne comprends pas votre question. Pour être honnête, je ne me comprends pas moi-même.",
-        "Veuillez remplir le formulaire A38 en triple exemplaire. Puis le formulaire B72. Puis abandonnez.",
-        "Avez-vous installé toutes les mises à jour Windows ? Elles ne servent à rien, mais c'est obligatoire.",
-        "Votre problème est causé par une incompatibilité avec Windows XP. (Vous n'avez pas XP ? Dommage.)",
-        "Je vous conseille de formater votre disque dur. Ça ne résoudra rien, mais au moins vous repartirez de zéro.",
-        "Erreur : Votre ordinateur est trop vieux pour être réparé. Il devrait être dans un musée.",
-        "Avez-vous essayé de débrancher et rebrancher le câble d'alimentation ? Pendant que l'ordi est allumé ?",
-        "C'est pas un bug, c'est une fonctionnalité premium. Payez 99€/mois pour la débloquer.",
-        "Je vais escalader votre ticket au niveau 2. (Il n'y a pas de niveau 2, désolé)",
-        "Votre ordinateur a 47 virus. Cliquez ici pour ne rien faire du tout."
+
+    const botQuestions = [
+        "Quand est apparue l’obsolescence programmée ?",
+        "Les GAFAM nous contrôlent-ils ?",
+        "Sommes-nous réellement libres avec nos smartphones ?",
+        "Pourquoi utiliser Linux plutôt que Windows ?",
+        "Qu’est-ce que la dépendance numérique ?",
+        "Comment les écoles luttent contre la dépendance numérique ?",
+        "Quel est l’impact écologique du numérique ?",
+        "Qu’est-ce que l’obsolescence programmée ?",
+        "Comment lutter contre l’obsolescence programmée ?"
     ];
-    
-    setTimeout(() => {
-        // Supprimer l'indicateur de frappe
-        const typingDiv = document.getElementById(typingId);
-        if (typingDiv) typingDiv.remove();
-        
-        // Message du bot - Style bulle moderne
-        const botMsg = botResponses[Math.floor(Math.random() * botResponses.length)];
-        chatDiv.innerHTML += `
-            <div style="margin: 10px 0;">
-                <div style="display: inline-block; background: #e3f2fd; border: 2px solid #0054E3; padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 75%; text-align: left;">
-                    <strong style="color: #0054E3;">🤖 BotSupport:</strong><br>
-                    <span style="color: #333;">${botMsg}</span>
-                </div>
+
+    const QA = {
+        "Quand est apparue l’obsolescence programmée ?":
+            "La première utilisation notable remonte aux années 1920 avec le Cartel Phœbus.",
+        "Les GAFAM nous contrôlent-ils ?":
+            "Oui. Ils influencent nos comportements grâce à la collecte massive de données.",
+        "Sommes-nous réellement libres avec nos smartphones ?":
+            "Non. Les interfaces orientent nos choix et limitent notre liberté.",
+        "Pourquoi utiliser Linux plutôt que Windows ?":
+            "Linux est plus libre, plus privé, plus stable et ne force pas des mises à jour.",
+        "Qu’est-ce que la dépendance numérique ?":
+            "C’est un besoin excessif d’utiliser des outils numériques jusqu’à influencer nos comportements.",
+        "Comment les écoles luttent contre la dépendance numérique ?":
+            "Elles limitent les smartphones, sensibilisent et proposent des activités alternatives.",
+        "Quel est l’impact écologique du numérique ?":
+            "Consommation d’énergie, pollution des métaux rares et déchets électroniques.",
+        "Qu’est-ce que l’obsolescence programmée ?":
+            "Le fait de créer des produits qui s’usent volontairement plus vite.",
+        "Comment lutter contre l’obsolescence programmée ?":
+            "Réparer, choisir des produits durables, utiliser des logiciels libres et recycler."
+    };
+
+    const botResponses = [
+        "La première utilisation notable de l'obsolescence programmée remonte aux années 1920. Un groupe d'industriels (le « Cartel Phœbus ») limitait volontairement la durée de vie des ampoules à 1 000 heures.",
+        "Oui. Les GAFAM collectent nos données, influencent ce que nous voyons et orientent nos comportements à travers leurs algorithmes. Leur pouvoir est discret mais très réel.",
+        "Non. Les interfaces, paramètres et écosystèmes sont conçus pour orienter nos choix. Nous suivons souvent des règles imposées sans en avoir conscience.",
+        "Linux est plus sécurisé, plus respectueux de la vie privée, plus stable, gratuit, et offre un contrôle total. En bref : plus de liberté et moins de surveillance.",
+        "C’est le besoin excessif d’utiliser smartphone, réseaux sociaux ou apps, au point que cela influence nos émotions, notre concentration et nos comportements.",
+        "Ils limitent les smartphones, sensibilisent aux dangers du numérique, proposent des activités alternatives, forment les enseignants et encouragent un usage responsable.",
+        "Il consomme énormément d’énergie, pollue lors de la fabrication, génère des déchets électroniques et augmente l’empreinte carbone via le streaming, le cloud et l’IA.",
+        "C’est le fait de créer un produit volontairement limité pour qu’il s’use ou devienne lent plus vite, afin d’inciter les consommateurs à racheter.",
+        "Réparer au lieu d’acheter, choisir des produits durables, utiliser des logiciels libres, éviter les mises à jour qui ralentissent et recycler correctement.",
+        "Parce qu’ils possèdent énormément de données personnelles, influencent nos décisions, limitent notre liberté numérique et renforcent notre dépendance.",
+        "Oui. Plus nous dépendons des technologies, plus nous sommes exposés au vol de données, au cyberharcèlement, à la manipulation et à la perte de vie privée."
+    ];
+
+    // ---------------------------
+    // 🎭 COMPORTEMENT SANS HASARD
+    // ---------------------------
+    let displayedUserMsg = userMsg;
+    let botMsg = "";
+
+    if (chatTurn % 2 === 0) {
+        // MODE 1 : Le bot remplace ton message par une question "officielle" puis y répond
+        const q = botQuestions[qaIndex];
+        displayedUserMsg = q;
+        botMsg = QA[q];
+
+        // Passer à la question suivante (boucle)
+        qaIndex = (qaIndex + 1) % botQuestions.length;
+    } else {
+        // MODE 2 : Le bot répond avec une phrase de sensibilisation générique
+        botMsg = botResponses[respIndex];
+
+        // Passer à la réponse suivante (boucle)
+        respIndex = (respIndex + 1) % botResponses.length;
+    }
+
+    // Alterner pour le prochain message
+    chatTurn++;
+
+    // ---------------------------
+    // 📌 AFFICHAGE MESSAGE USER
+    // ---------------------------
+    chatDiv.innerHTML += `
+        <div style="text-align:right;margin:10px 0;">
+            <div style="display:inline-block;background:#0054E3;color:white;padding:10px;border-radius:15px 15px 0 15px;max-width:70%;">
+                <strong>👤 Vous:</strong><br>${displayedUserMsg}
             </div>
-        `;
-        chatDiv.scrollTop = chatDiv.scrollHeight;
-    }, 1500 + Math.random() * 1000); // Temps de "réflexion" variable (1.5-2.5s)
-    
+        </div>`;
+    input.value = "";
+
+    // ---------------------------
+    // Animation de frappe
+    // ---------------------------
+    const typingId = "typing-" + Date.now();
+    chatDiv.innerHTML += `
+        <div id="${typingId}" style="margin:10px 0;">
+            <div style="display:inline-block;background:#eee;padding:10px;border-radius:15px;color:#666;font-style:italic;">
+                🐱 BotSupport est en train d'écrire...
+            </div>
+        </div>`;
     chatDiv.scrollTop = chatDiv.scrollHeight;
+
+    // ---------------------------
+    // 📌 RÉPONSE BOT (avec miaou)
+    // ---------------------------
+    botMsg = botMsg + " miaou";
+
+    setTimeout(() => {
+        document.getElementById(typingId)?.remove();
+        chatDiv.innerHTML += `
+            <div style="margin:10px 0;">
+                <div style="display:inline-block;background:#e3f2fd;border:2px solid #0054E3;padding:10px;border-radius:15px 15px 15px 0;max-width:75%;">
+                    <strong style="color:#0054E3;">🐱 BotSupport :</strong><br>${botMsg}
+                </div>
+            </div>`;
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    }, 1200);
 }
 
 
