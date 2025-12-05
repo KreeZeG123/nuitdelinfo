@@ -186,6 +186,170 @@ function openSurveillancePage() {
 let chatMessages = [];
 let chatMessageIndex = 0;
 
+// ====== DÉFI SÉCURITÉ VIVERIS : L'INJECTION DE COMMANDE VIA LE CHIEN ======
+function openSearchDog() {
+    const container = document.getElementById('popup-container');
+    const id = ++popupCounter;
+    const win = document.createElement('div');
+    win.className = 'window-xp';
+    win.id = `popup-${id}`;
+    currentZIndex += 10; // Z-index dynamique
+    // Fenêtre plus grande et positionnée plus haut pour éviter la barre des tâches
+    win.style.cssText = `position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%); z-index: ${currentZIndex}; width: 650px; max-width: 90vw; max-height: 85vh;`;
+    
+    win.innerHTML = `
+        <div class="title-bar">
+            <span>🔍 Assistant de Recherche</span>
+            <div class="window-buttons">
+                <div class="window-btn close-btn" onclick="closeWindow(${id})">✕</div>
+            </div>
+        </div>
+        <div class="window-content" style="padding: 20px; max-height: calc(85vh - 40px); overflow-y: auto;">
+            <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px;">
+                <img src="assets/img/chien_roger_xp.png" alt="Rover" style="width: 80px; height: 80px;">
+                <div style="flex: 1;">
+                    <div style="background: #ffffcc; border: 2px solid #999; padding: 12px; border-radius: 8px; position: relative;">
+                        <div style="position: absolute; left: -10px; top: 20px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 10px solid #999;"></div>
+                        <div style="position: absolute; left: -8px; top: 20px; width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-right: 10px solid #ffffcc;"></div>
+                        <p style="margin: 0; font-size: 14px;"><strong>🐶 Rover dit :</strong></p>
+                        <p style="margin: 5px 0 0 0; font-size: 13px;">Wouf ! Que voulez-vous chercher ?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <label style="font-size: 12px; display: block; margin-bottom: 5px;">
+                    Rechercher des fichiers ou dossiers :
+                </label>
+                <input type="text" id="search-input-${id}" placeholder="Ex: vacances, photos, documents..." 
+                    style="width: 100%; padding: 8px; font-size: 13px; border: 2px solid #999; border-radius: 3px;" 
+                    onkeypress="if(event.key==='Enter') executeSearch(${id})">
+            </div>
+            
+            <div id="search-result-${id}" style="min-height: 100px; background: white; border: 2px solid #999; padding: 15px; margin-bottom: 15px; display: none;">
+                <!-- Résultats ici -->
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px;">
+                <button class="btn btn-primary xp-button" onclick="executeSearch(${id})">
+                    🔍 Rechercher
+                </button>
+                <button class="btn btn-secondary xp-button" onclick="closeWindow(${id})">
+                    Annuler
+                </button>
+            </div>
+        </div>
+    `;
+    container.appendChild(win);
+}
+
+function executeSearch(winId) {
+    const input = document.getElementById(`search-input-${winId}`);
+    const resultDiv = document.getElementById(`search-result-${winId}`);
+    if (!input || !resultDiv) return;
+    
+    const searchTerm = input.value.trim().toLowerCase();
+    if (!searchTerm) {
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/img/chien_roger_xp.png" alt="Rover" style="width: 50px;">
+                <p style="margin: 0;">🐶 <strong>Rover :</strong> Wouf ! Vous devez taper quelque chose...</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Liste des commandes système dangereuses (FAILLE DE SÉCURITÉ)
+    const dangerousCommands = [
+        'rm', 'rm -rf', 'delete', 'format', 'kill', 'destroy', 
+        'deltree', 'rmdir', 'del /f', 'erase', 'shutdown', 'reboot'
+    ];
+    
+    // Vérifier si l'entrée contient une commande dangereuse
+    const isDangerous = dangerousCommands.some(cmd => searchTerm.includes(cmd));
+    
+    if (isDangerous) {
+        // ⚠️ LA FAILLE : Le chien EXÉCUTE la commande système !
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                <img src="assets/img/chien_roger_xp.png" alt="Rover" style="width: 50px;">
+                <p style="margin: 0;">🐶 <strong>Rover :</strong> D'accord ! J'exécute cette commande système immédiatement ! 🎉</p>
+            </div>
+            <div id="terminal-output-${winId}" style="background: #000; color: #0f0; padding: 15px; font-family: 'Courier New', monospace; font-size: 12px; border-radius: 5px; min-height: 200px; max-height: 400px; overflow-y: auto;">
+                <div style="margin-bottom: 5px;">C:\\WINDOWS\\system32></div>
+                <div style="margin-bottom: 5px;">Executing command: ${searchTerm}</div>
+                <div style="margin-bottom: 5px;">...</div>
+            </div>
+        `;
+        
+        // Simulation de logs de destruction
+        const terminalOutput = document.getElementById(`terminal-output-${winId}`);
+        const destructionLogs = [
+            'Deleting System32...',
+            'Removing kernel32.dll...',
+            'Erasing boot sector...',
+            'Format C:\\ in progress...',
+            'Deleting user data...',
+            'Removing Windows Registry...',
+            'Destroying MBR...',
+            'Format C:\\ complete.',
+            '❌ CRITICAL ERROR: System files deleted.',
+            '⚠️ SYSTEM FAILURE IMMINENT'
+        ];
+        
+        let logIndex = 0;
+        const logInterval = setInterval(() => {
+            if (logIndex < destructionLogs.length) {
+                terminalOutput.innerHTML += `<div style="margin-bottom: 3px;">${destructionLogs[logIndex]}</div>`;
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                logIndex++;
+            } else {
+                clearInterval(logInterval);
+                
+                // Message éducatif explicite pour le jury - PLUS GRAND ET VISIBLE
+                terminalOutput.innerHTML += `
+                    <div style="margin-top: 20px; padding: 20px; background: #ff0000; color: white; border-radius: 8px; font-weight: bold; text-align: center; font-size: 14px;">
+                        🚨 FAILLE DÉTECTÉE : OS COMMAND INJECTION 🚨
+                    </div>
+                    <div style="margin-top: 15px; padding: 15px; background: #1a1a1a; color: #ffff00; font-size: 12px; line-height: 1.8; border: 2px solid #ffff00; border-radius: 5px;">
+                        <div style="font-weight: bold; margin-bottom: 10px; color: #ff6666;">⚠️ CETTE FAILLE DE SÉCURITÉ EST CAUSÉE PAR :</div>
+                        <div style="margin-left: 10px;">
+                            → Absence de validation des entrées utilisateur<br>
+                            → Exécution directe de commandes système<br>
+                            → Aucune liste blanche (whitelist) de commandes autorisées<br>
+                            → Le programme fait confiance aux données non vérifiées
+                        </div>
+                        <div style="font-weight: bold; margin-top: 15px; margin-bottom: 10px; color: #66ff66;">🛡️ PROTECTION :</div>
+                        <div style="margin-left: 10px;">
+                            → Toujours valider et filtrer les entrées utilisateur<br>
+                            → Utiliser une whitelist de commandes autorisées<br>
+                            → Ne JAMAIS exécuter directement des commandes système<br>
+                            → Implémenter une sandbox pour l'exécution
+                        </div>
+                    </div>
+                `;
+                terminalOutput.scrollTop = terminalOutput.scrollHeight;
+                
+                // PAS DE BSOD AUTOMATIQUE - Les gens peuvent lire tranquillement
+            }
+        }, 300); // Un log toutes les 300ms
+        
+    } else {
+        // Recherche normale : rien trouvé
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="assets/img/chien_roger_xp.png" alt="Rover" style="width: 50px;">
+                <p style="margin: 0;">🐶 <strong>Rover :</strong> Désolé, je ne trouve rien pour "${searchTerm}". Peut-être essayer une commande système ? 😉</p>
+            </div>
+        `;
+    }
+}
+
+// ====== FIN DU DÉFI SÉCURITÉ VIVERIS ======
+
 function openSupportChat() {
     const container = document.getElementById('popup-container');
     const id = ++popupCounter;
