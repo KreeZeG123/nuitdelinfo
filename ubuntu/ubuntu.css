@@ -186,3 +186,10 @@ body {
 .window-content strong {
   color: #c5b3b3;
 }
+
+#quiz-container, 
+#quiz-container h2,
+#quiz-container p,
+#quiz-container button {
+    color: black !important;
+}
