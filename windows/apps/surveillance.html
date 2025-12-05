@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🔍 Surveillance Windows — Version Ludique</title>
+  <link rel="stylesheet" href="surveillance.css">
+</head>
+<body>
+<h1>🔍 Sensibilisation à la Surveillance Windows 🔍</h1>
+
+<div class="section" id="jeu1">
+  <h2>🎮 Mini-jeu — Trouve les espions de Windows 🎮</h2>
+  <p>Clique sur les icônes qui représentent une fonction pouvant collecter des données.</p>
+  <div class="icons">
+    <div class="icon" id="icon1" data-info="Le micro n'est utilisé que si la dictée vocale est activée.">🎤</div>
+    <div class="icon" id="icon2" data-info="L'identifiant publicitaire peut suivre tes habitudes.">📢</div>
+    <div class="icon" id="icon3" data-info="La recherche cloud peut envoyer ce que tu tapes.">🔍</div>
+    <div class="icon" id="icon4" data-info="Les plantages système sont envoyés à Microsoft pour diagnostic.">💥</div>
+  </div>
+  <div class="bubble" id="bubble"></div>
+</div>
+
+<div class="section" id="quiz" style="display: none;">
+  <h2>🧠 Quiz — Quel est ton niveau de parano ? 🧠</h2>
+  <p>Réponds aux questions :</p>
+
+  <div class="quiz-q">
+    1. Utilises-tu Cortana pour tout ?<br>
+    <button class="q" data-score="1">Oui</button>
+    <button class="q" data-score="3">Non</button>
+  </div>
+
+  <div class="quiz-q">
+    2. Laisser Windows recommander des pubs, ça te va ?<br>
+    <button class="q" data-score="1">Oui</button>
+    <button class="q" data-score="3">Non</button>
+  </div>
+
+  <div class="quiz-q">
+    3. Tu désactives tout ce que tu peux dans Confidentialité ?<br>
+    <button class="q" data-score="3">Oui</button>
+    <button class="q" data-score="1">Non</button>
+  </div>
+
+  <button id="seeResult">Voir mon résultat</button>
+  <div class="result" id="quizResult"></div>
+</div>
+
+<div class="section" id="vf" style="display: none;">
+  <h2>✅ Vrai ✅ ou ❌ Faux ❌ — Démystifions Windows</h2>
+
+  <p><strong>Affirmation :</strong> "Windows enregistre absolument tout ce que tu tapes."
+    <button class="vf-btn" data-correct="false">Faux</button>
+    <button class="vf-btn" data-correct="true">Vrai</button>
+  </p>
+  <div class="vf-feedback" id="vfFeedback">Windows ne fait pas ça. Mais certaines fonctions comme la saisie avancée peuvent envoyer des mots fréquents.</div>
+</div>
+
+
+
+<div class="section" id="jeu-vrai-faux" style="display: none;">
+<h2>🎯 Mini-Jeu — Windows ou Malware ?</h2>
+<p>Clique si le message est <u><b>vrai</b></u> (Windows) ou <u><b>faux</b></u> (malware/arnaque).</p>
+
+
+<div id="messages">
+<button class="vf-btn" data-correct="true">Votre antivirus est désactivé.</button>
+<button class="vf-btn" data-correct="false">Votre ordinateur va exploser, cliquez ici !!!</button>
+<button class="vf-btn" data-correct="true">Une application utilise votre caméra.</button>
+<button class="vf-btn" data-correct="false">Téléchargez ce pack gratuit d’optimisation Windows.</button>
+</div>
+
+
+<div id="vf-result" class="vf-feedback">Résultat ici !</div>
+</div>
+
+<div class="section" id="jeu-mdp" style="display: none;">
+<h2>🔐 Mini-Jeu — Mot de passe fort ou faible ?</h2>
+<p>Clique sur le bouton correspondant pour juger la force du mot de passe :</p>
+
+
+<div id="passwords">
+<button class="pw-btn" data-strong="false">P@ssword123</button>
+<button class="pw-btn" data-strong="true">u83Dh?z%k</button>
+<button class="pw-btn" data-strong="false">azer1234</button>
+<button class="pw-btn" data-strong="true">long_strong_phrase+random</button>
+</div>
+
+
+<div id="pw-result" class="vf-feedback">Résultat ici !</div>
+</div>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const quiz = document.getElementById('quiz');
+  const vf = document.getElementById('jeu-vrai-faux');
+  const mdp = document.getElementById('jeu-mdp');
+
+  // Masquer toutes les sections sauf le premier jeu
+  quiz.style.display = 'none';
+  vf.style.display = 'none';
+  mdp.style.display = 'none';
+
+  // ===== Jeu icônes =====
+  const icons = document.querySelectorAll('.icon');
+  const bubble = document.getElementById('bubble');
+  let clickedIcons = 0;
+
+  icons.forEach(icon => {
+    icon.addEventListener('click', () => {
+      bubble.style.display = 'block';
+      bubble.textContent = icon.getAttribute('data-info');
+
+      clickedIcons++;
+      if (clickedIcons === icons.length) {
+        quiz.style.display = 'block'; // Affiche le quiz seulement après tous les clics
+      }
+    });
+  });
+
+  // ===== Quiz parano =====
+  let score = 0;
+  const qButtons = document.querySelectorAll('.q');
+  const clickedQuestions = new Set();
+
+  qButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.quiz-q');
+      parent.querySelectorAll('.q').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      score += parseInt(btn.dataset.score);
+      clickedQuestions.add(parent);
+
+      if (clickedQuestions.size === document.querySelectorAll('.quiz-q').length) {
+        vf.style.display = 'block'; // Affiche Vrai/Faux après toutes les réponses du quiz
+      }
+    });
+  });
+
+  document.getElementById('seeResult').addEventListener('click', () => {
+    const r = document.getElementById('quizResult');
+    r.style.display = 'block';
+    if (score <= 4) r.textContent = "🧘 Zen : tu fais confiance à Microsoft !";
+    else if (score <= 7) r.textContent = "🕵️ Détective : tu surveilles la surveillance !";
+    else r.textContent = "🐱‍👤 Ninja total de la vie privée !";
+  });
+
+  // ===== Vrai/Faux =====
+  const vfBtns = document.querySelectorAll('#messages .vf-btn');
+  const vfResult = document.getElementById('vf-result');
+  let clickedVf = 0;
+
+  vfBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      vfResult.style.display = 'block';
+      vfResult.textContent = btn.dataset.correct === 'true' ? '✅ Correct ! C’est bien un vrai message Windows.' : '❌ Faux ! C’est une arnaque ou malware potentiel.';
+
+      btn.parentElement.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      clickedVf++;
+      if (clickedVf === vfBtns.length) {
+        mdp.style.display = 'block'; // Affiche le jeu Mot de passe après tous les clics Vrai/Faux
+      }
+    });
+  });
+
+  // ===== Mot de passe =====
+  const pwBtns = document.querySelectorAll('#passwords .pw-btn');
+  const pwResult = document.getElementById('pw-result');
+
+  pwBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pwResult.style.display = 'block';
+      pwResult.textContent = btn.dataset.strong === 'true' ? '✅ Correct ! Mot de passe fort.' : '❌ Attention ! Mot de passe faible.';
+
+      btn.parentElement.querySelectorAll('.pw-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
