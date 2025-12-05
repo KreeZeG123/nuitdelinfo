@@ -1,0 +1,725 @@
+/* RESET ET BASE */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Tahoma', 'Verdana', sans-serif;
+    user-select: none;
+}
+
+
+/* FOND D'ÉCRAN WINDOWS XP (Bliss) */
+
+#desktop-xp {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, #5a9fd4 0%, #306998 100%);
+    background-image: url('assets/img/windowsXP.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+
+/* ICÔNES DU BUREAU */
+
+.desktop-icons {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+    height: 80vh;
+    width: 100px;
+}
+
+
+.icon {
+    width: 80px;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.icon:hover {
+    background-color: rgba(0, 0, 255, 0.2);
+    border: 1px dotted white;
+    border-radius: 5px;
+}
+
+
+.icon img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 5px;
+}
+
+/* Icône Linux qui clignote ROUGE/VERT (SOS) */
+.linux-icon-救 {
+    animation: blink-sos 1.5s infinite;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+@keyframes blink-sos {
+    0% { 
+        background-color: rgba(255, 0, 0, 0.4);
+        border: 3px solid #ff0000;
+        transform: scale(1);
+    }
+    25% { 
+        background-color: rgba(255, 0, 0, 0.7);
+        border: 3px solid #ff0000;
+        transform: scale(1.1);
+    }
+    50% { 
+        background-color: rgba(0, 255, 0, 0.4);
+        border: 3px solid #00ff00;
+        transform: scale(1);
+    }
+    75% { 
+        background-color: rgba(0, 255, 0, 0.7);
+        border: 3px solid #00ff00;
+        transform: scale(1.1);
+    }
+    100% { 
+        background-color: rgba(255, 0, 0, 0.4);
+        border: 3px solid #ff0000;
+        transform: scale(1);
+    }
+}
+
+
+/* FENÊTRES POP-UP (STYLE XP) */
+
+.window-xp {
+    position: absolute;
+    min-width: 320px;
+    max-width: 500px;
+    background-color: #ECE9D8;
+    border: 3px solid;
+    border-top-color: #0054E3;
+    border-left-color: #0054E3;
+    border-right-color: #003C9D;
+    border-bottom-color: #003C9D;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+    font-size: 12px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out;
+}
+
+
+@keyframes slideIn {
+
+    from {
+    transform: scale(0.8);
+    opacity: 0;
+    }
+
+    to {
+    transform: scale(1);
+    opacity: 1;
+    }
+
+}
+
+/* Animation de tremblement pour la popup critique */
+@keyframes shake {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+    10% { transform: translate(-50%, -50%) rotate(-1deg); }
+    20% { transform: translate(-50%, -50%) rotate(1deg); }
+    30% { transform: translate(-50%, -50%) rotate(-1deg); }
+    40% { transform: translate(-50%, -50%) rotate(1deg); }
+    50% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+
+.title-bar {
+
+    background: linear-gradient(to right, #0054E3 0%, #3094F0 100%);
+
+    color: white;
+
+    padding: 4px 8px;
+
+    font-weight: bold;
+
+    font-size: 11px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-radius: 5px 5px 0 0;
+
+    cursor: move;
+
+}
+
+
+.window-buttons {
+
+    display: flex;
+
+    gap: 2px;
+
+}
+
+
+.window-btn {
+
+    width: 21px;
+
+    height: 21px;
+
+    background: linear-gradient(to bottom, #F0F0F0 0%, #C0C0C0 100%);
+
+    border: 1px solid;
+
+    border-top-color: white;
+
+    border-left-color: white;
+
+    border-right-color: #808080;
+
+    border-bottom-color: #808080;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.window-btn:active {
+
+    background: linear-gradient(to bottom, #C0C0C0 0%, #F0F0F0 100%);
+
+    border-top-color: #808080;
+
+    border-left-color: #808080;
+
+    border-right-color: white;
+
+    border-bottom-color: white;
+
+}
+
+
+.close-btn {
+
+    background: linear-gradient(to bottom, #FF5E52 0%, #E04238 100%) !important;
+
+    color: white;
+
+}
+
+
+.window-content {
+
+    padding: 20px;
+
+    background: #ECE9D8;
+
+    color: #000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 0 0 5px 5px;
+
+}
+
+
+.window-content img {
+
+    max-width: 64px;
+
+    margin-bottom: 15px;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* BARRE DES TÂCHES */
+
+.taskbar {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    right: 0;
+
+    height: 40px;
+
+    background: linear-gradient(to bottom, #245DDA 0%, #173886 100%);
+
+    display: flex;
+
+    align-items: center;
+
+    border-top: 2px solid #3F94FD;
+
+    z-index: 9999;
+
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+
+}
+
+
+.start-btn {
+
+    background: linear-gradient(to bottom, #3C8D0D 0%, #225603 100%);
+
+    border: 2px outset #84D643;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-style: italic;
+
+    font-size: 14px;
+
+    padding: 4px 12px;
+
+    border-radius: 0 10px 10px 0;
+
+    margin: 3px 5px 3px 0;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+
+}
+
+
+.start-btn:hover {
+
+background: linear-gradient(to bottom, #4CAD15 0%, #2D6D05 100%);
+
+}
+
+
+.start-btn:active {
+
+border-style: inset;
+
+}
+
+
+.taskbar-apps {
+
+flex: 1;
+
+display: flex;
+
+gap: 5px;
+
+padding: 0 10px;
+
+}
+
+/* Bouton Linux dans la barre des tâches */
+.linux-taskbar-btn {
+    background: linear-gradient(to bottom, #D32F2F 0%, #B71C1C 100%);
+    border: 2px solid;
+    border-top-color: #FF5252;
+    border-left-color: #FF5252;
+    border-right-color: #B71C1C;
+    border-bottom-color: #B71C1C;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    animation: blink-taskbar-sos 1.5s infinite;
+}
+
+@keyframes blink-taskbar-sos {
+    0% { 
+        background: linear-gradient(to bottom, #D32F2F 0%, #B71C1C 100%);
+        border-top-color: #FF5252;
+        border-left-color: #FF5252;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+    25% { 
+        background: linear-gradient(to bottom, #E53935 0%, #C62828 100%);
+        box-shadow: 0 0 25px rgba(255, 0, 0, 1);
+    }
+    50% { 
+        background: linear-gradient(to bottom, #388E3C 0%, #2E7D32 100%);
+        border-top-color: #66BB6A;
+        border-left-color: #66BB6A;
+        box-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+    }
+    75% { 
+        background: linear-gradient(to bottom, #43A047 0%, #2E7D32 100%);
+        box-shadow: 0 0 25px rgba(0, 255, 0, 1);
+    }
+    100% { 
+        background: linear-gradient(to bottom, #D32F2F 0%, #B71C1C 100%);
+        border-top-color: #FF5252;
+        border-left-color: #FF5252;
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+    }
+}
+
+.linux-taskbar-btn:hover {
+    transform: scale(1.05);
+}
+
+.linux-taskbar-btn:active {
+    border-style: inset;
+    transform: scale(0.98);
+}
+
+
+.system-tray {
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+padding: 0 10px;
+
+background: #0B79D3;
+
+height: 32px;
+
+border-left: 2px solid #1084E8;
+
+}
+
+
+.tray-icons {
+
+color: white;
+
+font-size: 14px;
+
+}
+
+
+.clock {
+
+background: #0B79D3;
+
+padding: 4px 12px;
+
+color: white;
+
+font-size: 11px;
+
+font-weight: bold;
+
+}
+
+
+/* MENU DÉMARRER */
+
+.start-menu {
+
+position: fixed;
+
+bottom: 40px;
+
+left: 0;
+
+width: 300px;
+
+background: #ECE9D8;
+
+border: 3px solid;
+
+border-top-color: #0054E3;
+
+border-left-color: #0054E3;
+
+border-right-color: #003C9D;
+
+border-bottom-color: #003C9D;
+
+border-radius: 8px 8px 0 0;
+
+box-shadow: 5px 0 20px rgba(0,0,0,0.5);
+
+z-index: 10000;
+
+animation: slideUp 0.2s ease-out;
+
+}
+
+
+@keyframes slideUp {
+
+from {
+
+transform: translateY(100%);
+
+opacity: 0;
+
+}
+
+to {
+
+transform: translateY(0);
+
+opacity: 1;
+
+}
+
+}
+
+
+.start-menu-header {
+
+background: linear-gradient(to right, #245DDA 0%, #173886 100%);
+
+color: white;
+
+padding: 15px;
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+font-weight: bold;
+
+border-radius: 5px 5px 0 0;
+
+}
+
+
+.start-menu-items {
+
+padding: 10px 0;
+
+}
+
+
+.menu-item {
+
+padding: 10px 20px;
+
+cursor: pointer;
+
+font-size: 13px;
+
+display: flex;
+
+align-items: center;
+
+gap: 10px;
+
+}
+
+
+.menu-item:hover {
+
+background: linear-gradient(to right, #3F94FD 0%, #2371D8 100%);
+
+color: white;
+
+}
+
+
+.start-menu-footer {
+
+padding: 10px;
+
+border-top: 1px solid #999;
+
+display: flex;
+
+justify-content: center;
+
+}
+
+
+/* BOUTONS STYLE XP */
+
+.xp-button {
+
+background: linear-gradient(to bottom, #F0F0F0 0%, #C0C0C0 100%);
+
+border: 1px solid;
+
+border-top-color: white;
+
+border-left-color: white;
+
+border-right-color: #808080;
+
+border-bottom-color: #808080;
+
+padding: 6px 20px;
+
+cursor: pointer;
+
+font-size: 11px;
+
+color: #000000;
+
+}
+
+
+.xp-button:active {
+
+background: linear-gradient(to bottom, #C0C0C0 0%, #F0F0F0 100%);
+
+border-top-color: #808080;
+
+border-left-color: #808080;
+
+border-right-color: white;
+
+border-bottom-color: white;
+
+}
+
+
+/* PUBLICITÉS INTRUSIVES */
+
+.ad-popup {
+
+border: 3px solid red !important;
+
+animation: shake 0.5s infinite;
+
+}
+
+
+@keyframes shake {
+
+0%, 100% { transform: translateX(0); }
+
+25% { transform: translateX(-5px); }
+
+75% { transform: translateX(5px); }
+
+}
+
+
+.ad-content {
+
+background: yellow;
+
+padding: 20px;
+
+border: 5px dashed red;
+
+animation: blink 1s infinite;
+
+}
+
+
+@keyframes blink {
+
+0%, 50% { opacity: 1; }
+
+25%, 75% { opacity: 0.7; }
+
+}
+
+
+/* ANIMATION POUR LA BULLE DE NOTIFICATION */
+
+@keyframes slideInRight {
+
+from {
+
+transform: translateX(400px);
+
+opacity: 0;
+
+}
+
+to {
+
+transform: translateX(0);
+
+opacity: 1;
+
+}
+
+} 
+
+/* ... GARDE TOUT TON CSS EXISTANT ... */
+/* ... AJOUTE CA A LA FIN : ... */
+
+/* ECRAN BLEU DE LA MORT (BSOD) */
+.bsod {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000082; /* Le bleu officiel BSOD */
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding: 50px;
+    z-index: 999999; /* Au dessus de TOUT */
+    font-size: 18px;
+    line-height: 1.5;
+    cursor: none; /* On cache la souris */
+}
+
+.blink {
+    animation: blinker 1s linear infinite;
+    color: #ffff00; /* Jaune pour que ce soit visible */
+    margin-top: 50px;
+    border: 1px dashed white;
+    padding: 10px;
+    display: inline-block;
+}
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
