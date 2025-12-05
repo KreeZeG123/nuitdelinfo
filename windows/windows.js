@@ -2,6 +2,7 @@
 
 let popupCounter = 0;
 let scenarioStarted = false;
+let currentZIndex = 5000; // Z-index de base qui s'incrémente pour chaque nouvelle fenêtre
 
 
 const pubs = [
@@ -35,7 +36,8 @@ function createPopupLoading(titre, message) {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    win.style.cssText = 'position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: 6000;';
+    currentZIndex += 10; // Z-index dynamique
+    win.style.cssText = `position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); z-index: ${currentZIndex};`;
     
     let progress = 0;
     win.innerHTML = `
@@ -105,7 +107,8 @@ function createTrashWindow() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    win.style.cssText = 'position: fixed; left: 30%; top: 20%; z-index: 6000; min-width: 400px;';
+    currentZIndex += 10; // Z-index dynamique
+    win.style.cssText = `position: fixed; left: 30%; top: 20%; z-index: ${currentZIndex}; min-width: 400px;`;
     
     const trashFiles = [
         "virus.exe", "trojan_2003.dll", "spam_emails_archive.pst",
@@ -154,8 +157,9 @@ function openSurveillancePage() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    // Grande fenêtre qui prend presque tout l'écran
-    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 9000; width: 95vw; height: 90vh; max-width: 1200px;';
+    // Grande fenêtre qui prend presque tout l'écran - z-index dynamique
+    currentZIndex += 10; // Incrémente le z-index pour être au-dessus
+    win.style.cssText = `position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: ${currentZIndex}; width: 95vw; height: 90vh; max-width: 1200px;`;
     
     win.innerHTML = `
         <div class="title-bar">
@@ -176,10 +180,6 @@ function openSurveillancePage() {
     `;
     container.appendChild(win);
     
-    // Démarrer le scénario si pas encore démarré
-    if (!scenarioStarted) {
-        setTimeout(() => startScenario(), 2000);
-    }
 }
 
 // Support Technique : Chat Bot Débile
@@ -192,8 +192,9 @@ function openSupportChat() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
-    // FENÊTRE COMPLÈTE ET IMPOSANTE ! Z-index très élevé pour rester au-dessus de TOUTES les autres popups
-    win.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 99999; width: 700px; max-width: 90vw; height: 600px; max-height: 85vh;';
+    // FENÊTRE COMPLÈTE ET IMPOSANTE ! Z-index dynamique
+    currentZIndex += 10; // Incrémente le z-index pour être au-dessus
+    win.style.cssText = `position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: ${currentZIndex}; width: 700px; max-width: 90vw; height: 600px; max-height: 85vh;`;
     
     chatMessages = [];
     chatMessageIndex = 0;
@@ -315,7 +316,8 @@ function createPopupCentral(titre, message, type = 'info') {
     windowDiv.style.left = '50%';
     windowDiv.style.top = '50%';
     windowDiv.style.transform = 'translate(-50%, -50%)';
-    windowDiv.style.zIndex = '5000';
+    currentZIndex += 10; // Z-index dynamique pour que la dernière popup soit au-dessus
+    windowDiv.style.zIndex = currentZIndex;
     
     // Icone
     let iconSymbol = 'ℹ️';
@@ -372,6 +374,8 @@ function createPopup(titre, message, type = 'info', customIcon = null) {
     
     windowDiv.style.left = `${x}px`;
     windowDiv.style.top = `${y}px`;
+    currentZIndex += 10; // Z-index dynamique pour que chaque nouvelle popup soit au-dessus
+    windowDiv.style.zIndex = currentZIndex;
     
     // Icone DIVERSIFIÉE
     let iconSymbol = customIcon || 'ℹ️';
@@ -456,10 +460,11 @@ function createVerificationWindow() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
+    currentZIndex += 10; // Z-index dynamique
     win.style.cssText = `
         position: fixed; left: 50%; top: 50%;
         transform: translate(-50%, -50%);
-        z-index: 8000; min-width: 450px;
+        z-index: ${currentZIndex}; min-width: 450px;
         box-shadow: 0 0 50px rgba(255,0,0,0.5); border: 3px solid red;
         animation: shake 0.5s infinite;
     `;
@@ -529,10 +534,11 @@ function showLinuxTransitionTrap() {
     const win = document.createElement('div');
     win.className = 'window-xp';
     win.id = `popup-${id}`;
+    currentZIndex += 10; // Z-index dynamique
     win.style.cssText = `
         position: fixed; left: 40%; top: 30%;
         transform: translate(-50%, -50%);
-        z-index: 9999; min-width: 500px;
+        z-index: ${currentZIndex}; min-width: 500px;
         box-shadow: 0 0 50px rgba(255,0,0,0.8); 
         border: 4px solid #ff0000;
         animation: shake 0.5s infinite;
@@ -630,7 +636,8 @@ function validateLinuxTransition(winId) {
     const loadingWin = document.createElement('div');
     loadingWin.className = 'window-xp';
     loadingWin.id = `popup-${loadingId}`;
-    loadingWin.style.cssText = 'position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 9999;';
+    currentZIndex += 10; // Z-index dynamique
+    loadingWin.style.cssText = `position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: ${currentZIndex};`;
     
     loadingWin.innerHTML = `
         <div class="title-bar">
@@ -687,14 +694,18 @@ let currentWindow = null;
 let offset = { x: 0, y: 0 };
 
 document.addEventListener('mousedown', (e) => {
-    // Si on clique sur la barre de titre
+    // Si on clique sur n'importe quelle fenêtre (pas seulement la barre de titre)
+    const clickedWindow = e.target.closest('.window-xp');
+    if (clickedWindow) {
+        // Mettre la fenêtre cliquée au premier plan avec un nouveau z-index
+        currentZIndex += 10;
+        clickedWindow.style.zIndex = currentZIndex;
+    }
+    
+    // Si on clique sur la barre de titre, activer le déplacement
     if (e.target.closest('.title-bar')) {
         isDragging = true;
         currentWindow = e.target.closest('.window-xp');
-        
-        // Mettre la fenêtre au premier plan (Z-Index)
-        document.querySelectorAll('.window-xp').forEach(w => w.style.zIndex = '1000');
-        currentWindow.style.zIndex = '5000';
 
         // Calculer l'écart souris/fenêtre
         const rect = currentWindow.getBoundingClientRect();
